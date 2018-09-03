@@ -64,6 +64,24 @@ public class ExampleClient extends WebSocketClient {
 	public void onClose( int code, String reason, boolean remote ) {
 		// The codecodes are documented in class org.java_websocket.framing.CloseFrame
 		System.out.println( "Connection closed by " + ( remote ? "remote peer" : "us" ) + " Code: " + code + " Reason: " + reason );
+		if (remote) {
+			Runnable task = () -> {
+				while (!Thread.currentThread().isInterrupted()) {
+					System.out.println("start reconnection");
+					try {
+						Thread.sleep(2000L);
+						boolean b = this.reconnectBlocking();
+						if (b) {
+							break;
+						}
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				this.send("hello reconnection success!");
+			};
+			new Thread(task).start();
+		}
 	}
 
 	@Override

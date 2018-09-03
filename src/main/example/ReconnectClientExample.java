@@ -33,22 +33,23 @@ import java.net.URISyntaxException;
  */
 public class ReconnectClientExample {
 	public static void main( String[] args ) throws URISyntaxException, InterruptedException {
-		ExampleClient c = new ExampleClient( new URI( "ws://localhost:8887" ) );
+		ExampleClient c = new ExampleClient( new URI( "ws://localhost:8888/webSocket" ) );
 		//Connect to a server normally
 		c.connectBlocking();
 		c.send( "hi" );
-		Thread.sleep( 10 );
-		c.closeBlocking();
-		//Disconnect manually and reconnect blocking
-		c.reconnectBlocking();
-		c.send( "it's" );
-		Thread.sleep( 10000 );
-		c.closeBlocking();
-		//Disconnect manually and reconnect
-		c.reconnect();
-		Thread.sleep( 100 );
-		c.send( "me" );
-		Thread.sleep( 100 );
-		c.closeBlocking();
+		System.out.println("执行没有啊");
+//		Thread.sleep( 10 );
+//		c.closeBlocking();
+//		//Disconnect manually and reconnect blocking
+//		c.reconnectBlocking();
+//		c.send( "it's" );
+//		Thread.sleep( 10000 );
+//		c.closeBlocking();
+//		//Disconnect manually and reconnect
+//		c.reconnectBlocking();
+//		Thread.sleep( 100 );
+//		c.send( "me" );
+//		Thread.sleep( 100 );
+//		c.closeBlocking();
 	}
 }
